@@ -1,0 +1,41 @@
+<div class="content d-flex justify-content-center" role="main">
+
+
+  <mat-form-field appearance="outline">
+    <mat-label>Select City</mat-label>
+    <mat-select [(ngModel)]="selectedValue" name="city"  (selectionChange)="onCityChange($event)">
+      <mat-option *ngFor="let c of cities" [value]="c.value">
+        {{c.viewValue}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+<div class="d-flex justify-content-center"  >
+  <mat-card class="example-card" *ngIf="weatherForecastData" style="background-color: bisque;">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title><a routerLink="/upcoming/{{weatherForecastData.name}}">{{weatherForecastData.name}}</a></mat-card-title>
+      <mat-card-subtitle>{{weatherForecastData.main.temp}} &#8457; </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <div fxLayout="column" fxLayoutAlign="space-around" fxLayoutGap="10px">
+        <div fxLayout="row" fxLayoutGap="10px">
+          <div fxLayout="column">
+            <span><b> Min Temp :</b> {{weatherForecastData.main.temp_min}} &#8457;  </span>
+          </div>
+          <div fxLayout="column">
+            <span><b> Max Temp :</b> {{weatherForecastData.main.temp_max}} &#8457;  </span>
+          </div>
+        </div>
+      <div fxLayout="row" fxLayoutGap="10px">
+        <div fxLayout="column">
+          <span><b> Sun Rise :</b> {{weatherForecastData.sys.sunrise | date:'mediumTime'}} </span>
+        </div>
+        <div fxLayout="column">
+          <span><b> Sun Set :</b> {{weatherForecastData.sys.sunset | date:'mediumTime'}} </span>
+        </div>
+      </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
